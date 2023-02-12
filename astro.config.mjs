@@ -14,6 +14,8 @@ import partytown from '@astrojs/partytown'
 
 // https://astro.build/config
 export default defineConfig({
+    output: 'server',
+    adapter: vercel(),
     integrations: [
         astroImageTools,
         partytown({
@@ -28,5 +30,4 @@ export default defineConfig({
             useCdn: false,
         }),
     ],
-    adapter: vercel(),
 })
