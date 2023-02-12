@@ -1,0 +1,25 @@
+---
+export interface Props {
+    bgColor?: 'blue' | 'plum' | 'transparent'
+}
+
+const { bgColor } = Astro.props
+---
+
+<div class={bgColor ? `section-${bgColor}` : 'section-blue'}>
+    <slot />
+</div>
+
+<style lang="scss">
+    .section-plum {
+        background-color: var(--plum);
+    }
+
+    .section-blue {
+        background-color: var(--dkblue);
+    }
+
+    .section-transparent {
+        background-color: transparent;
+    }
+</style>

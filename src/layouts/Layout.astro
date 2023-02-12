@@ -1,0 +1,93 @@
+---
+import Nav from '../components/Nav.astro'
+import Footer from '../components/Footer.astro'
+
+export interface Props {
+    title: string
+}
+
+const { title } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+    </head>
+    <body>
+        <Nav />
+        <slot />
+        <Footer />
+    </body>
+</html>
+<style is:global>
+    :root {
+        --black: #171321;
+        --dkblue: #0d314b;
+        --plum: #4b0d49;
+        --hotmag: #ff17e4;
+        --magenta: #e310cb;
+        --aqua: #86fbfb;
+        --white: #f7f8fa;
+        --font-size: 1.3rem;
+        --mono: 'Oxygen mono', monospace;
+        --sans: Oxygen, sans-serif;
+    }
+
+    html {
+        box-sizing: border-box;
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: inherit;
+    }
+
+    .sr-only {
+        border: 0;
+        clip: rect(0, 0, 0, 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: var(--sans);
+        background-color: var(--black);
+        color: var(--white);
+        font-size: var(--font-size);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+    }
+
+    a {
+        color: var(--magenta);
+    }
+    a:hover {
+        color: var(--hotmag);
+        text-decoration: none;
+    }
+
+    .content-lg {
+        padding: 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+</style>

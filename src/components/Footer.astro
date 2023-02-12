@@ -1,0 +1,62 @@
+---
+import Content from './Content.astro'
+import GithubIcon from './icons/GithubIcon.astro'
+import LinkedinIcon from './icons/LinkedinIcon.astro'
+import TwitterIcon from './icons/TwitterIcon.astro'
+const date = new Date()
+const currentYear = date.toLocaleString('default', { year: 'numeric' })
+---
+
+<footer>
+    <Content>
+    <h3>Contact me through my social accounts!</h3>
+    <ul>
+        <li>
+            <a href="https://www.linkedin.com/in/ebartunek/" target="_blank">
+                <span aria-hidden="true">
+                    <LinkedinIcon class="fa-brand" />
+                </span>
+                <span class="sr-only">LinkedIn</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.github.com/etuned" target="_blank">
+                <span aria-hidden="true">
+                    <GithubIcon class="fa-brand" />
+                </span>
+                <span class="sr-only">Github</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.twitter.com/edwinbartunek" target="_blank">
+                <span aria-hidden="true">
+                    <TwitterIcon class="fa-brand" />
+                </span>
+                <span class="sr-only">Twitter</span>
+            </a>
+        </li>
+    </ul>
+    <p>
+        <small>
+            &copy; 2022 - {currentYear} Edwin Bartunek. All rights reserved.
+        </small>
+    </p>
+</Content>
+</footer>
+
+<style lang="scss">
+    footer {
+        text-align: center;
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 2rem 0;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            gap: 3rem;
+            font-size: 2.5rem;
+        }
+    }
+</style>

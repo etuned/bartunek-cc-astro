@@ -1,0 +1,56 @@
+---
+export interface Props {
+    name: string
+    subHeading: string
+    description: string
+    descriptionBefore: string
+    linkText: string
+    href: string
+    descriptionAfter: string
+}
+
+const {
+    name,
+    subHeading,
+    description,
+    descriptionBefore,
+    linkText,
+    href,
+    descriptionAfter,
+}: Props = Astro.props
+---
+
+<section id="intro">
+    <p>Hi, my name is <span class="name">{name}.</span></p>
+    <h2>{subHeading}</h2>
+    <p>{description}</p>
+    <p>
+        {descriptionBefore}
+        <a href={href} target="_blank">{linkText}</a>{
+            descriptionAfter ? ` ${descriptionAfter}` : '.'
+        }
+    </p>
+</section>
+
+<style lang="scss">
+    #intro {
+        padding-bottom: 2.5rem;
+            p {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            .name {
+                font-family: var(--mono);
+            }
+            span {
+                font-family: var(--sans);
+                font-size: 4rem;
+                color: var(--aqua);
+                display: block;
+            }
+            h2 {
+                font-size: 2.5rem;
+                font-weight: normal;
+            }
+    }
+</style>

@@ -1,0 +1,20 @@
+---
+export interface Props {
+    name: string
+}
+const { name } = Astro.props
+---
+
+<div class="title">
+    <h2>{name}</h2>
+</div>
+<style lang="scss">
+    .title {
+        margin-bottom: calc(2.5rem * 1.5);
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: calc(2.5rem * 1.5);
+        }
+    }
+</style>

@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Separator from '../components/Separator.astro'
+import ColoredContainer from '../components/ColoredContainer.astro'
+import SectionTitle from '../components/SectionTitle.astro'
+import Content from '../components/Content.astro';
+---
+
+<Layout title="Edwin Bartunek">
+    <main>
+        <Separator />
+        <ColoredContainer bgColor="plum">
+          <Content>
+            <SectionTitle name="About Edwin" />
+            <div class="about-container">
+                <p>
+                    Edwin Bartunek's passion for programming on the web started
+                    at an early age. He has been working professionally as a
+                    software engineer for over 6 years and loves the idea of
+                    learning all aspects of the technologies that make up the
+                    web.
+                </p>
+            </div>
+          </Content>
+        </ColoredContainer>
+        <Separator />
+    </main>
+</Layout>
+
+<style>
+    .about-container {
+        max-width: 730px;
+        padding: 3rem 1rem;
+    }
+</style>

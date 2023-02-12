@@ -1,0 +1,110 @@
+---
+import { Picture } from 'astro-imagetools/components'
+
+import Layout from '../layouts/Layout.astro'
+
+import Intro from '../components/Intro.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import Separator from '../components/Separator.astro'
+import ColoredContainer from '../components/ColoredContainer.astro'
+import SectionTitle from '../components/SectionTitle.astro'
+
+import { getInProgressProjects } from '../../lib/sanity'
+import Content from '../components/Content.astro'
+
+const projects = await getInProgressProjects(`0..3`)
+---
+
+<Layout title="Edwin Bartunek">
+    <main>
+        <div class="flex-res-container content-lg">
+            <div class="intro-container">
+                <Intro
+                    name="Edwin Bartunek"
+                    subHeading="I help build the web."
+                    description="I am a software engineer, focused on creating accessible, user friendly software platforms on the web. I am also obssesed with pizza and coffee!"
+                    descriptionBefore="Currently, I am working at "
+                    linkText="Zehitomo"
+                    href="http://zehitomo.com"
+                    descriptionAfter={null}
+                />
+            </div>
+            <div class="picture-container">
+                <Picture
+                    src="/src/assets/edwin-profile.jpeg"
+                    alt="A picture of Edwin smiling with a blue shirt on."
+                    placeholder="blurred"
+                    width={400}
+                    sizes="(max-width: 200px) 100vw, 200px "
+                    loading="eager"
+                    aspect={1 / 1}
+                />
+            </div>
+        </div>
+        <Separator />
+        <ColoredContainer>
+          <Content>
+            <SectionTitle name="My Latest Projects" />
+            {
+                projects.map((project, index) => (
+                    <ProjectCard
+                        index={index}
+                        _id={project._id}
+                        _createdAt={project._createdAt}
+                        _updatedAt={project._updatedAt}
+                        name={project.name}
+                        mainImage={project.mainImage}
+                        codeUrl={project.codeUrl}
+                        liveUrl={project.liveUrl}
+                        dates={project.dates}
+                        employer={project.employer}
+                        technologies={project.technologies}
+                        short={project.short}
+                        description={project.description}
+                    />
+                ))
+            }
+            </Content>
+        </ColoredContainer>
+        <Separator />
+    </main>
+</Layout>
+
+<style>
+    .flex-res-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .intro-container {
+        max-width: 730px;
+        margin: 0 auto 0 0;
+    }
+
+    .picture-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-image {
+        border-radius: 100%;
+    }
+
+    @media (min-width: 850px) {
+        .flex-res-container {
+            padding-bottom: 10rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-direction: row;
+        }
+        .profile-image {
+            border-radius: 0.5rem;
+        }
+        .picture-container {
+            display: flex;
+            align-items: flex-start;
+        }
+    }
+</style>

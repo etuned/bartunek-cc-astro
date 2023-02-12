@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import Separator from '../components/Separator.astro'
+import ColoredContainer from '../components/ColoredContainer.astro'
+
+import { getProjects, getSelf } from '../../lib/sanity'
+
+import { Project } from '../../types'
+import SectionTitle from '../components/SectionTitle.astro'
+
+const projects = await getProjects()
+---
+
+<Layout title="Edwin Bartunek">
+    <main>
+        <Separator />
+        <ColoredContainer>
+            <SectionTitle name="My Projects" />
+            {
+                projects.map((project, index) => (
+                    <ProjectCard
+                        index={index}
+                        _id={project._id}
+                        _createdAt={project._createdAt}
+                        _updatedAt={project._updatedAt}
+                        name={project.name}
+                        mainImage={project.mainImage}
+                        codeUrl={project.codeUrl}
+                        liveUrl={project.liveUrl}
+                        dates={project.dates}
+                        employer={project.employer}
+                        technologies={project.technologies}
+                        short={project.short}
+                        description={project.description}
+                    />
+                ))
+            }
+        </ColoredContainer>
+        <Separator />
+    </main>
+</Layout>
+
+<style>
+    .flex-res-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .intro-container {
+        max-width: 730px;
+        margin: 0 auto 0 0;
+    }
+
+    .picture-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-image {
+        border-radius: 100%;
+    }
+
+    @media (min-width: 850px) {
+        .flex-res-container {
+            padding-bottom: 10rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-direction: row;
+        }
+        .profile-image {
+            border-radius: 0.5rem;
+        }
+        .picture-container {
+            display: flex;
+            align-items: flex-start;
+        }
+    }
+</style>

@@ -1,0 +1,292 @@
+---
+import { Picture } from 'astro-imagetools/components'
+
+export interface Project {
+    _id?: string
+    _createdAt?: string
+    _updatedAt?: string
+    index?: number
+    name?: string
+    mainImage?: {
+        alt: string
+        src: string
+        lqip: string
+        colorDominant: {
+            background: string
+            foreground: string
+            title: string
+        }
+        colorVibrant: {
+            background: string
+            foreground: string
+            title: string
+        }
+    }
+    codeUrl?: {
+        isPrivate: boolean
+        link: string
+    }
+    liveUrl?: {
+        isPrivate: boolean
+        link: string
+    }
+    dates?: {
+        isInProgress?: string
+        startDate: string
+        endDate?: string
+    }
+    employer?: {
+        _id: string
+        name: string
+        image: {
+            alt: string
+            src: string
+            lqip: string
+            colorDominant: {
+                background: string
+                foreground: string
+                title: string
+            }
+            colorVibrant: {
+                background: string
+                foreground: string
+                title: string
+            }
+        }
+    }
+    technologies?: [
+        {
+            _id: string
+            title: string
+            description: string
+        }
+    ]
+    short?: string
+    description?: [object]
+}
+
+const {
+    index,
+    name,
+    mainImage,
+    codeUrl,
+    liveUrl,
+    dates,
+    employer,
+    technologies,
+    short,
+}: Project = Astro.props
+---
+
+<div class="content-lg">
+    <section class="project">
+        <article>
+            <div class={index % 2 == 0 ? 'text' : 'text-reverse'}>
+                <h3>{name}</h3>
+                <p>
+                    {
+                        new Date(dates.startDate).toLocaleDateString(
+                            undefined,
+                            {
+                                year: 'numeric',
+                                month: 'numeric',
+                                day: 'numeric',
+                            }
+                        )
+                    }
+                    {dates.endDate ? ' - ' : null}
+                    {
+                        dates.endDate
+                            ? new Date(dates.endDate).toLocaleDateString(
+                                  undefined,
+                                  {
+                                      year: 'numeric',
+                                      month: 'numeric',
+                                      day: 'numeric',
+                                  }
+                              )
+                            : null
+                    }
+                </p>
+                <div class="blackbox">
+                    <p>{short}</p>
+                    {
+                        codeUrl.link && !codeUrl.isPrivate ? (
+                            <a href={codeUrl.link}>Source Code</a>
+                        ) : null
+                    }
+                    {codeUrl.link && !codeUrl.isPrivate ? '|' : null}
+                    {
+                        liveUrl.link && !liveUrl.isPrivate ? (
+                            <a href={liveUrl.link}>Live Demo</a>
+                        ) : null
+                    }
+                </div>
+                <h4>The technologies includes:</h4>
+                <ul>
+                    {technologies.map((data) => <li>{data.title}</li>)}
+                </ul>
+                <div class={index % 2 == 0 ? 'container' : 'container-reverse'}>
+                    <div class="employer">
+                        <img
+                            class="img-small"
+                            src={employer.image.src +
+                                '?h=100&w=100&fit=crop&crop=center&auto=format'}
+                            alt={employer.image.alt}
+                            width="70px"
+                            height="70px"
+                            loading="lazy"
+                        />
+                        <div>
+                            <p>Made for:</p>
+                            <p>{employer.name}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class={index % 2 == 0 ? 'image' : 'image-reverse'}>
+                <Picture
+                    src={mainImage ? mainImage.src : '404img.png'}
+                    alt={mainImage ? mainImage.alt : 'coming soon'}
+                    layout="fill"
+                    sizes="(max-width: 500px) 100vw, 500px"
+                    breakpoints={[200, 500]}
+                    loading="lazy"
+                />
+            </div>
+        </article>
+    </section>
+</div>
+
+<style lang="scss">
+    .project {
+        padding: 3rem 1rem;
+
+        h3 {
+            color: var(--aqua);
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-family: var(--mono);
+            margin-block: 1rem;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+            gap: 1rem;
+            font-size: 1rem;
+        }
+
+        .image {
+            width: 100%;
+            height: auto;
+            margin: 2rem 0 4rem 0;
+            padding: 1rem;
+            border-left: 1px solid var(--aqua);
+            border-top: 1px solid var(--aqua);
+            border-radius: 25px;
+        }
+
+        .blackbox {
+            z-index: 2;
+            padding: 1rem;
+            border-radius: 10px;
+            color: white;
+            background-color: var(--black);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            justify-content: flex-start;
+
+            .employer {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                flex-direction: row-reverse;
+                gap: 10px;
+
+                .img-small {
+                    border-radius: 100%;
+                    background-color: var(--black);
+                }
+            }
+        }
+    }
+
+    @media (min-width: 800px) {
+        .project {
+            article {
+                display: grid;
+                grid-template-rows: 155px 1fr 1fr;
+                grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr 1.5fr;
+            }
+
+            .image {
+                grid-row: 1 / 4;
+                grid-column: 1 / 4;
+            }
+
+            .text {
+                z-index: 2;
+                grid-row: 1 / 4;
+                grid-column: 7 / 3;
+                text-align: right;
+                ul {
+                    justify-content: flex-end;
+                    margin-block: 0.5rem;
+                }
+            }
+
+            .image-reverse {
+                grid-row: 1 / 4;
+                grid-column: 7 / 4;
+            }
+
+            .text-reverse {
+                z-index: 2;
+                grid-row: 1 / 4;
+                grid-column: 1 / 5;
+                order: 2;
+                text-align: left;
+                ul {
+                    justify-content: flex-start;
+                    margin-block: 0.5rem;
+                }
+            }
+
+            .container {
+                justify-content: flex-end;
+                .employer {
+                    flex-flow: row wrap;
+                    justify-content: flex-end;
+                    gap: 50px;
+                }
+            }
+
+            .container-reverse {
+                justify-content: flex-start;
+
+                .employer {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    flex-direction: row-reverse;
+                    gap: 50px;
+
+                    .img-small {
+                        border-radius: 100%;
+                        background-color: var(--black);
+                    }
+                }
+            }
+        }
+    }
+</style>

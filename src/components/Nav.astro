@@ -1,0 +1,102 @@
+---
+import LogoIcon from './icons/LogoIcon.astro'
+import GithubIcon from './icons/GithubIcon.astro'
+import LinkedinIcon from './icons/LinkedinIcon.astro'
+---
+
+<nav>
+    <ul>
+        <li>
+            <h1>
+                <a href="/">
+                    <span aria-hidden="true">
+                        <LogoIcon class="logo" />
+                    </span>
+                    <span class="sr-only">Home</span>
+                </a>
+            </h1>
+        </li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li>
+            <a href="https://www.linkedin.com/in/ebartunek/" target="_blank">
+                <span aria-hidden="true">
+                    <LinkedinIcon class="fa-brand" />
+                </span>
+                <span class="sr-only">LinkedIn</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.github.com/etuned">
+                <span aria-hidden="true">
+                    <GithubIcon class="fa-brand" />
+                </span>
+                <span class="sr-only">Github</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<style lang="scss">
+    nav {
+        font-family: var(--mono);
+        font-size: 80%;
+        padding: 1rem;
+
+        li:first-child {
+            flex-basis: 100%;
+            text-align: center;
+        }
+
+        h1 a {
+            font-family: var(--sans);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            width: 100%;
+        }
+
+        .fa-brand {
+            color: var(--aqua);
+        }
+
+        a {
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+        }
+
+        a:hover .fa-brand {
+            color: var(--magenta);
+        }
+    }
+
+    @media (min-width: 850px) {
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+
+            li:first-child {
+                flex-basis: auto;
+                text-align: left;
+                margin-right: auto;
+            }
+
+            .logo {
+                max-height: 85px;
+            }
+        }
+    }
+</style>
