@@ -7,7 +7,7 @@ import { astroImageTools } from 'astro-imagetools'
 import sanity from 'astro-sanity'
 
 // https://astro.build/config
-import vercel from '@astrojs/vercel/serverless'
+import vercel from '@astrojs/vercel/edge'
 
 // https://astro.build/config
 import partytown from '@astrojs/partytown'
@@ -28,6 +28,5 @@ export default defineConfig({
             useCdn: false,
         }),
     ],
-    output: 'server',
     adapter: vercel(),
 })
