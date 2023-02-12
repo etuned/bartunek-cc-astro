@@ -10,9 +10,17 @@ import sanity from 'astro-sanity'
 import vercel from '@astrojs/vercel/serverless'
 
 // https://astro.build/config
+import partytown from '@astrojs/partytown'
+
+// https://astro.build/config
 export default defineConfig({
     integrations: [
         astroImageTools,
+        partytown({
+            config: {
+                forward: ['dataLayer.push'],
+            },
+        }),
         sanity({
             projectId: 'nk528ugs',
             dataset: 'production',
