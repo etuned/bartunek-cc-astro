@@ -7,11 +7,28 @@ export interface Props {
 }
 
 const { title } = Astro.props
+const GA_MEASUREMENT_ID = "G-MCCJK1H53R"
 ---
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Start Partytown GA4 -->
+        <script
+        type="text/partytown"
+        src="https://www.googletagmanager.com/gtag/js?id=G-MCCJK1H53R" >
+        </script>
+        <script type="text/partytown">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", "G-MCCJK1H53R");
+        </script>
+        <!-- End Partytown GA4 --> 
+        
+        
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
