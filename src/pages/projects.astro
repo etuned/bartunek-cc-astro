@@ -8,6 +8,7 @@ import { getProjects, getSelf } from '../../lib/sanity'
 
 import { Project } from '../../types'
 import SectionTitle from '../components/SectionTitle.astro'
+import Content from '../components/Content.astro'
 
 const projects = await getProjects()
 ---
@@ -16,26 +17,28 @@ const projects = await getProjects()
     <main>
         <Separator />
         <ColoredContainer>
-            <SectionTitle name="My Projects" />
-            {
-                projects.map((project, index) => (
-                    <ProjectCard
-                        index={index}
-                        _id={project._id}
-                        _createdAt={project._createdAt}
-                        _updatedAt={project._updatedAt}
-                        name={project.name}
-                        mainImage={project.mainImage}
-                        codeUrl={project.codeUrl}
-                        liveUrl={project.liveUrl}
-                        dates={project.dates}
-                        employer={project.employer}
-                        technologies={project.technologies}
-                        short={project.short}
-                        description={project.description}
-                    />
-                ))
-            }
+            <Content>
+                <SectionTitle name="My Projects" />
+                {
+                    projects.map((project, index) => (
+                        <ProjectCard
+                            index={index}
+                            _id={project._id}
+                            _createdAt={project._createdAt}
+                            _updatedAt={project._updatedAt}
+                            name={project.name}
+                            mainImage={project.mainImage}
+                            codeUrl={project.codeUrl}
+                            liveUrl={project.liveUrl}
+                            dates={project.dates}
+                            employer={project.employer}
+                            technologies={project.technologies}
+                            short={project.short}
+                            description={project.description}
+                        />
+                    ))
+                }
+            </Content>
         </ColoredContainer>
         <Separator />
     </main>
