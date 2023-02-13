@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Separator from '../../components/Separator.astro'
+import ColoredContainer from '../../components/ColoredContainer.astro'
+import SectionTitle from '../../components/SectionTitle.astro'
+import Content from '../../components/Content.astro'
+---
+
+<Layout title="Blog | Edwin Bartunek">
+    <main>
+        <Separator />
+        <ColoredContainer>
+            <Content>
+                <SectionTitle name="Blog" />
+                <div class="blog-container"><p>Coming soon!</p></div>
+            </Content>
+        </ColoredContainer>
+        <Separator />
+    </main>
+</Layout>
+
+<style>
+    .blog-container {
+        max-width: 730px;
+        padding: 1rem 1rem 4rem 1rem;
+    }
+</style>
